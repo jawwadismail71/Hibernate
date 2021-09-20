@@ -396,7 +396,7 @@ class Lotus extends Flower {
 	Address  Flight	Employee  Current Student
 	Farmer FlightTicket Passenger
 	InsurancePolicy, Claim
-									BaseDAO
+									
 									BaseDAOImpl
 										| 5 methods
 						---------------------------------
@@ -404,7 +404,10 @@ class Lotus extends Flower {
 	SavingsAccountDAO	|		|   FlightDAO			|	StudentDAO
 	 |					|		|	|					|     |
 	 SavingsAccountDAOImpl		FlightDAOImpl		StudentDAOImpl
-	 
+	 5							5					5
+	 findSavings() {			findFlight() {		findStudent() {
+	 	super.find(111)			super.find(456)		super.find(140);
+	 }
 	 			
 	 			
 	 			

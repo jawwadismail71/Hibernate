@@ -1,11 +1,13 @@
 package com.lti.designpatter.basedao;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import com.lti.SavingsAccount;
 
@@ -14,39 +16,64 @@ public class BaseDAOImpl {
 	
 	public BaseDAOImpl() {
 		this.entityManagerFactory = Persistence.createEntityManagerFactory("MyJPA"); //this will read the persistence.xml file
-		System.out.println("Got the EntityManagerFactory : "+entityManagerFactory);
 	}
 	public void persist(Object obj) { //persist is a dummy/userdefined name
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		System.out.println("Entity Manager ..."+entityManager);
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		System.out.println("Entity Transaction is created.."+entityTransaction);
-		entityTransaction.begin();  	System.out.println("Entity Transaction begin()");
-			entityManager.persist(obj);	System.out.println("Object persisted...");
-		entityTransaction.commit();
-		System.out.println("Entitty Transaction commited...");		entityManager.close();
+		EntityManager entityManager = null;
+		try {
+			entityManager = entityManagerFactory.createEntityManager();
+			EntityTransaction entityTransaction = entityManager.getTransaction();
+			entityTransaction.begin();  	
+					entityManager.persist(obj);	
+					entityTransaction.commit();
+		} finally { entityManager.close(); }
 
 	}
-	public Object find(Class theClass, Serializable pk ) {
-		// TODO Auto-generated method stub
-					EntityManager entityManager = entityManagerFactory.createEntityManager();
-					System.out.println("Entity Manager ..."+entityManager);
-					EntityTransaction entityTransaction = entityManager.getTransaction();
-					System.out.println("Entity Transaction is created.."+entityTransaction);
-					entityTransaction.begin();  	System.out.println("Entity Transaction begin()");
-					Object foundSavingsAccObj = entityManager.find(theClass, pk);	System.out.println("Object found...");
-					entityTransaction.commit();
-					System.out.println("Entitty Transaction commited...");		entityManager.close();
-				return foundSavingsAccObj;
+	public <AnyClass> AnyClass find(Class<AnyClass> theClass, Serializable pk ) {
+		EntityManager entityManager = null;
+		AnyClass foundSavingsAccObj = null;
+		try {			
+			entityManager = entityManagerFactory.createEntityManager();
+			EntityTransaction entityTransaction = entityManager.getTransaction();
+			entityTransaction.begin();  	
+			foundSavingsAccObj = entityManager.find(theClass, pk);	
+			entityTransaction.commit();
+		} finally { entityManager.close(); }
+			return foundSavingsAccObj;
 	}
 	
-	public void findAll(Class theClass, String pojo) {
+	public <E> List<E>  findAll(String pojoName) {
+		EntityManager entityManager = null;
 		
+		try {			
+			entityManager = entityManagerFactory.createEntityManager();
+			EntityTransaction entityTransaction = entityManager.getTransaction();
+			//entityTransaction.begin();  	
+			Query query = entityManager.createQuery(" from "+ pojoName);
+			return query.getResultList();
+			//entityTransaction.commit();
+		} finally { entityManager.close(); }
 	}
+	
+	
 	public void merge(Object obj) {
+		EntityManager entityManager = null;
+		try {
+			entityManager = entityManagerFactory.createEntityManager();
+			EntityTransaction entityTransaction = entityManager.getTransaction();
+			entityTransaction.begin();  	
+					entityManager.merge(obj);	
+					entityTransaction.commit();
+		} finally { entityManager.close(); }
 		
 	}
 	public void remove(Object obj) {
-		
+		EntityManager entityManager = null;
+		try {
+			entityManager = entityManagerFactory.createEntityManager();
+			EntityTransaction entityTransaction = entityManager.getTransaction();
+			entityTransaction.begin();  	
+					entityManager.remove(obj);	
+					entityTransaction.commit();
+		} finally { entityManager.close(); }
 	}
 }

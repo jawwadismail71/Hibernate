@@ -17,6 +17,22 @@ public class SavingsAccountCrudTest {
 	
 	BaseDAOImpl baseDAO = new BaseDAOImpl();
 	
+	
+	@Test
+	public void selectAllSavingsAccountViaBaseDAOTest() {
+		
+		List<SavingsAccount> savList = baseDAO.findAll("SavingsAccount");
+		
+		for(SavingsAccount savObj : savList) {
+			System.out.println("Account Number  : "+savObj.getAccountNumber());
+			System.out.println("Account Name    : "+savObj.getAccountHolderName());
+			System.out.println("Account Balance : "+savObj.getAccountBalance());	
+		}
+		
+	}
+	
+	
+	
 	@Test
 	public void selectSavingsAccountViaBaseDAOTest() {
 		
