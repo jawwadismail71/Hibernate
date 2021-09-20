@@ -412,7 +412,13 @@ class Lotus extends Flower {
 	 			
 	 			
 	 			
-	 			
+	layer1 - database tables
+	layer2 - POJO	Farmer, Bidder, Crop, Bid, SoilCertificate, Bank
+	layer3 - repo - HIBERNATE DAO DAOIMPLs <-- BaseDAOImpl
+	layer4 - service
+	layer5 - spring
+	layer6 - angular
+			
 	 			
 	 			
 	 			
