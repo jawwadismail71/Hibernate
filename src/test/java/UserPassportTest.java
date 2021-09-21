@@ -19,31 +19,31 @@ public class UserPassportTest {
 		Passport passport = baseDAO.find(Passport.class,12);
 		System.out.println("Expirty : "+passport.getExpiryYear());
 		
-		user.setPassport(passport);
+	//	user.setPassport(passport);
 		passport.setUser(user); //setting the FK for the passport table
 		
-		baseDAO.merge(passport);
+		baseDAO.merge(user);
 	}
 	
-	/*@Test
+	@Test
 	void addUserAlongWithPassport() {
 		
 		User user = new User();
 		user.setUsername("King");
 		user.setEmailAddress("King@gmail.com");
 		user.setAge(22);
+	
 		
 		Passport passport = new Passport();
 		passport.setIssuedBy("Govt Of India");
 		passport.setExpiryYear("2032");
 		
-		user.setPassport(passport); // assigning the passport to the user
 		passport.setUser(user);
 		
 		baseDAO.merge(user);
-		//baseDAO.merge(passport); //persist the user, who is aware where the passport is!!!!
+		baseDAO.merge(passport); 
 		
-	}*/
+	}
 	
 	
 	@Test

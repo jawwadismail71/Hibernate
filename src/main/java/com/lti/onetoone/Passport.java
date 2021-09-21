@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="passport2")
+@Table(name="passport3")
 /*
  * EMP
  * empno ename job hiredate...sal.. deptno

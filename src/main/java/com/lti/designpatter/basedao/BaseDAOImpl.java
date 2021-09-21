@@ -2,6 +2,7 @@ package com.lti.designpatter.basedao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,7 +42,7 @@ public class BaseDAOImpl {
 			return foundSavingsAccObj;
 	}
 	
-	public <E> List<E>  findAll(String pojoName) {
+	public <E> List  findAll(String pojoName) {
 		EntityManager entityManager = null;
 		
 		try {			

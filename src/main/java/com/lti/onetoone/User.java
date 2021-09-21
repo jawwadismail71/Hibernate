@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="userdetails2")
+@Table(name="userdetails3")
 /*
  * DEPT
  * deptno dname loc
@@ -30,18 +30,18 @@ public class User {
 	
 	private int age;
 
-	@OneToOne
+	@OneToOne(mappedBy="user")
 	Passport passport;
 	
 	
 	
-	public Passport getPassport() {
+	/*public Passport getPassport() {
 		return passport;
 	}
 
 	public void setPassport(Passport passport) {
 		this.passport = passport;
-	}
+	}*/
 
 	public int getUserId() {
 		return userId;
